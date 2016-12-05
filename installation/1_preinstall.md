@@ -1,5 +1,6 @@
 System Configuration Checks
-1. vm.swappiness
+
+- Check vm.swappiness
 
 Steps in setting vm.swappiness to 1
 
@@ -17,25 +18,25 @@ Show current vm.swappiness value
 [ec2-user@ip-172-31-3-11 ~]$ cat /proc/sys/vm/swappiness
 1
 ```
-2. Show the mount attributes of all volumes
+- Show the mount attributes of all volumes
 ```
 [ec2-user@ip-172-31-3-11 ~]$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/xvda1       32G  2.0G   28G   7% /
 tmpfs           7.3G     0  7.3G   0% /dev/shm
 ```
-3. Show the reserve space of any non-root, ext-based volumes
+- Show the reserve space of any non-root, ext-based volumes
 
 None as of the moment
 
-4. Show that transparent hugepages is disabled
+- Show that transparent hugepages is disabled
 ```
 [ec2-user@ip-172-31-3-11 ~]$ cat /proc/sys/vm/nr_hugepages
 0
 [ec2-user@ip-172-31-3-11 ~]$ grep -i HugePages_Total /proc/meminfo
 HugePages_Total:       0
 ```
-5. Report the network interface attributes
+- Report the network interface attributes
 ```
 [ec2-user@ip-172-31-3-11 ~]$ ifconfig
 eth0      Link encap:Ethernet  HWaddr 02:47:E7:25:B4:6D
@@ -57,7 +58,7 @@ lo        Link encap:Local Loopback
           collisions:0 txqueuelen:0
           RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
 ```
-6. Show forward and reverse host lookups using getent and nslookup
+- Show forward and reverse host lookups using getent and nslookup
 
 getent
 ```
@@ -76,7 +77,7 @@ Non-authoritative answer:
 Name:   ip-172-31-3-11.ap-southeast-1.compute.internal
 Address: 172.31.3.11
 ```
-7. Verify the nscd service is running
+- Verify the nscd service is running
 
 nscd is not installed by default, install nscd using yum
 ```
@@ -94,7 +95,7 @@ Check nscd status
 nscd (pid 2329) is running...
 ```
 
-8. Verify the ntpd service is running
+- Verify the ntpd service is running
 Start ntpd service and make it persistent.
 ```
 [ec2-user@ip-172-31-3-11 ~]$ sudo service ntpd start
