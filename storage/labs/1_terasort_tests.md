@@ -124,9 +124,9 @@ real    1m55.447s
 user    0m6.050s
 sys     0m0.658s
 ```
-*Run the terasort command on this file
-*Use the time command to report the job's duration
-*Land the result under your user's home directory
+* Run the terasort command on this file
+* Use the time command to report the job's duration
+* Land the result under your user's home directory
 ```
 [robgajudo@ip-172-31-3-11 ~]$ time hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-0.20-mapreduce/hadoop-examples.jar terasort /user/robgajudo/terasort-test /user/robgajudo/terasort-testoutput
 16/12/06 00:18:58 INFO terasort.TeraSort: starting
