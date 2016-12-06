@@ -1,5 +1,6 @@
 ```
-Confirm the path values given below correspond to your installation
+#!/bin/sh
+# Confirm the path values given below correspond to your installation
 
 HADOOP_MR=/opt/cloudera/parcels/CDH/lib/hadoop-0.20-mapreduce
 HADOOP_PATH=/opt/cloudera/parcels/CDH/bin
