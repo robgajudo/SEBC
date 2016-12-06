@@ -158,3 +158,133 @@ Let one partner use distCp on the command line
                 COPY=4
 ```
 Let the other use BDR
+
+* Used Scheduled replication through CM with source directory /robgajudo to /targetgithub
+* Use hdfs fsck <path> -files -blocks on your source and target directories
+
+Source
+```
+[ec2-user@ip-172-31-3-11 hadoop-0.20-mapreduce]$ hdfs fsck /robgajudo -files -blocks
+Connecting to namenode via http://ip-172-31-3-11.ap-southeast-1.compute.internal:50070
+FSCK started by ec2-user (auth:SIMPLE) from /172.31.3.11 for path /robgajudo at Mon Dec 05 22:58:48 EST 2016
+/robgajudo <dir>
+/robgajudo/terasort-inputrob <dir>
+/robgajudo/terasort-inputrob/_SUCCESS 0 bytes, 0 block(s):  OK
+
+/robgajudo/terasort-inputrob/part-m-00000 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743096_2272 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743098_2274 len=127926272 Live_repl=3
+
+/robgajudo/terasort-inputrob/part-m-00001 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743095_2271 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743097_2273 len=127926272 Live_repl=3
+
+Status: HEALTHY
+ Total size:    524288000 B
+ Total dirs:    2
+ Total files:   3
+ Total symlinks:                0
+ Total blocks (validated):      4 (avg. block size 131072000 B)
+ Minimally replicated blocks:   4 (100.0 %)
+ Over-replicated blocks:        0 (0.0 %)
+ Under-replicated blocks:       0 (0.0 %)
+ Mis-replicated blocks:         0 (0.0 %)
+ Default replication factor:    3
+ Average block replication:     3.0
+ Corrupt blocks:                0
+ Missing replicas:              0 (0.0 %)
+ Number of data-nodes:          4
+ Number of racks:               1
+FSCK ended at Mon Dec 05 22:58:48 EST 2016 in 4 milliseconds
+
+
+The filesystem under path '/robgajudo' is HEALTHY
+```
+* Before replication is triggered
+```
+[ec2-user@ip-172-31-3-11 hadoop-0.20-mapreduce]$ hdfs fsck /targetgithub -files -blocks
+Connecting to namenode via http://ip-172-31-3-11.ap-southeast-1.compute.internal:50070
+FSCK started by ec2-user (auth:SIMPLE) from /172.31.3.11 for path /targetgithub at Mon Dec 05 22:59:05 EST 2016
+/targetgithub <dir>
+/targetgithub/terasort-inputrob <dir>
+/targetgithub/terasort-inputrob/_SUCCESS 0 bytes, 0 block(s):  OK
+
+/targetgithub/terasort-inputrob/part-m-00000 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743118_2294 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743121_2297 len=127926272 Live_repl=3
+
+/targetgithub/terasort-inputrob/part-m-00001 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743119_2295 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743122_2298 len=127926272 Live_repl=3
+
+Status: HEALTHY
+ Total size:    524288000 B
+ Total dirs:    2
+ Total files:   3
+ Total symlinks:                0
+ Total blocks (validated):      4 (avg. block size 131072000 B)
+ Minimally replicated blocks:   4 (100.0 %)
+ Over-replicated blocks:        0 (0.0 %)
+ Under-replicated blocks:       0 (0.0 %)
+ Mis-replicated blocks:         0 (0.0 %)
+ Default replication factor:    3
+ Average block replication:     3.0
+ Corrupt blocks:                0
+ Missing replicas:              0 (0.0 %)
+ Number of data-nodes:          4
+ Number of racks:               1
+FSCK ended at Mon Dec 05 22:59:05 EST 2016 in 1 milliseconds
+
+
+The filesystem under path '/targetgithub' is HEALTHY
+```
+* After Replication
+```
+[ec2-user@ip-172-31-3-11 hadoop-0.20-mapreduce]$ hdfs fsck /targetgithub -files -blocks
+Connecting to namenode via http://ip-172-31-3-11.ap-southeast-1.compute.internal:50070
+FSCK started by ec2-user (auth:SIMPLE) from /172.31.3.11 for path /targetgithub at Mon Dec 05 23:00:32 EST 2016
+/targetgithub <dir>
+/targetgithub/robgajudo <dir>
+/targetgithub/robgajudo/terasort-inputrob <dir>
+/targetgithub/robgajudo/terasort-inputrob/_SUCCESS 0 bytes, 0 block(s):  OK
+
+/targetgithub/robgajudo/terasort-inputrob/part-m-00000 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743170_2346 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743172_2348 len=127926272 Live_repl=3
+
+/targetgithub/robgajudo/terasort-inputrob/part-m-00001 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743171_2347 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743173_2349 len=127926272 Live_repl=3
+
+/targetgithub/terasort-inputrob <dir>
+/targetgithub/terasort-inputrob/_SUCCESS 0 bytes, 0 block(s):  OK
+
+/targetgithub/terasort-inputrob/part-m-00000 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743118_2294 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743121_2297 len=127926272 Live_repl=3
+
+/targetgithub/terasort-inputrob/part-m-00001 262144000 bytes, 2 block(s):  OK
+0. BP-884406542-172.31.3.11-1480936588799:blk_1073743119_2295 len=134217728 Live_repl=3
+1. BP-884406542-172.31.3.11-1480936588799:blk_1073743122_2298 len=127926272 Live_repl=3
+
+Status: HEALTHY
+ Total size:    1048576000 B
+ Total dirs:    4
+ Total files:   6
+ Total symlinks:                0
+ Total blocks (validated):      8 (avg. block size 131072000 B)
+ Minimally replicated blocks:   8 (100.0 %)
+ Over-replicated blocks:        0 (0.0 %)
+ Under-replicated blocks:       0 (0.0 %)
+ Mis-replicated blocks:         0 (0.0 %)
+ Default replication factor:    3
+ Average block replication:     3.0
+ Corrupt blocks:                0
+ Missing replicas:              0 (0.0 %)
+ Number of data-nodes:          4
+ Number of racks:               1
+FSCK ended at Mon Dec 05 23:00:32 EST 2016 in 3 milliseconds
+
+
+The filesystem under path '/targetgithub' is HEALTHY
+```
