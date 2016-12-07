@@ -1,7 +1,7 @@
 * An uber optimization is the possibility to run all tasks of a MapReduce job in the ApplicationMaster's JVM if the job is small enough.
 * The Kerberos Security Realm value is displayed under Administration -> Settings -> Kerberos -> Kerberos Security Realm
 * Which CDH service(s) host a property for enabling Kerberos authentication?
--- Cloudera Manager
+-- All CDH services can use secured authentication via Kerberos
 * To upgrade the CM agents, you may use the Upgrade Wizard that is invoked when you connect to the Admin Console or manually install the Cloudera Manager agent packages.
 * Give the tsquery statement used to chart Hue's CPU utilization?
 -- select cgroup_cpu_system_rate, cpu_user_rate where serviceType = HUE
