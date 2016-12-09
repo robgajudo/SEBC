@@ -111,6 +111,7 @@ rhui-REGION-rhel-server-releases-optional                                     Re
 rhui-REGION-rhel-server-rh-common                                             Red Hat Enterprise Linux Server 6 RH Common (RPMs)                                                      129
 repolist: 28,957
 ```
+```
 [root@ip-172-31-2-22 ~]# yum repolist enabled
 Loaded plugins: amazon-id, rhui-lb, security
 rhui-REGION-client-config-server-6                                                                                                                                | 2.9 kB     00:00
@@ -127,4 +128,135 @@ rhui-REGION-rhel-server-releases                                              Re
 rhui-REGION-rhel-server-releases-optional                                     Red Hat Enterprise Linux Server 6 Optional (RPMs)                                                    10,444
 rhui-REGION-rhel-server-rh-common                                             Red Hat Enterprise Linux Server 6 RH Common (RPMs)                                                      129
 repolist: 28,957
+```
+
+* Useradd
+```
+[root@ip-172-31-15-248 ~]# useradd -u 2700 raffles
+[root@ip-172-31-15-248 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles)
+[root@ip-172-31-15-248 ~]# useradd -u 2800 orchard
+[root@ip-172-31-15-248 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard)
+```
+```
+[root@ip-172-31-2-18 ~]# useradd -u 2700 raffles
+radd -u 2800 orchard
+id raffles
+id orchard[root@ip-172-31-2-18 ~]# useradd -u 2800 orchard
+[root@ip-172-31-2-18 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles)
+[root@ip-172-31-2-18 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard)
+```
+```
+[root@ip-172-31-2-20 ~]# useradd -u 2700 raffles
+seradd -u 2800 orchard
+id raffles
+id orchard[root@ip-172-31-2-20 ~]# useradd -u 2800 orchard
+[root@ip-172-31-2-20 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles)
+[root@ip-172-31-2-20 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard)
+```
+```
+[root@ip-172-31-2-21 ~]# useradd -u 2700 raffles
+useradd -u 2800 orchard
+id raffles
+id orchard[root@ip-172-31-2-21 ~]# useradd -u 2800 orchard
+[root@ip-172-31-2-21 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles)
+[root@ip-172-31-2-21 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard)
+```
+```
+[root@ip-172-31-2-22 ~]# useradd -u 2700 raffles
+useradd -u 2800 orchard
+id raffles
+id orchard[root@ip-172-31-2-22 ~]# useradd -u 2800 orchard
+[root@ip-172-31-2-22 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles)
+[root@ip-172-31-2-22 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard)
+```
+* Groupadd
+```
+[root@ip-172-31-15-248 ~]# groupadd shops
+[root@ip-172-31-15-248 ~]# usermod -G shops orchard
+[root@ip-172-31-15-248 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard),2801(shops)
+[root@ip-172-31-15-248 ~]# groupadd walks
+[root@ip-172-31-15-248 ~]# usermod -G walks raffles
+[root@ip-172-31-15-248 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles),2802(walks)
+```
+```
+[root@ip-172-31-2-18 ~]# groupadd shops
+groupadd walks
+[root@ip-172-31-2-18 ~]# groupadd walks
+usermod -G shops orchard
+usermod -G walks raffles
+[root@ip-172-31-2-18 ~]# usermod -G shops orchard
+id orchard
+id raffles[root@ip-172-31-2-18 ~]# usermod -G walks raffles
+[root@ip-172-31-2-18 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard),2801(shops)
+[root@ip-172-31-2-18 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles),2802(walks)
+```
+```
+[root@ip-172-31-2-20 ~]# groupadd shops
+groupadd walks
+usermod -G shops orchard
+[root@ip-172-31-2-20 ~]# groupadd walks
+usermod -G walks raffles
+id orchard
+id raffles[root@ip-172-31-2-20 ~]# usermod -G shops orchard
+[root@ip-172-31-2-20 ~]# usermod -G walks raffles
+[root@ip-172-31-2-20 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard),2801(shops)
+[root@ip-172-31-2-20 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles),2802(walks)
+```
+```
+[root@ip-172-31-2-21 ~]# groupadd shops
+groupadd walks
+usermod -G shops orchard
+[root@ip-172-31-2-21 ~]# groupadd walks
+usermod -G walks raffles
+id orchard
+[root@ip-172-31-2-21 ~]# usermod -G shops orchard
+id raffles[root@ip-172-31-2-21 ~]# usermod -G walks raffles
+[root@ip-172-31-2-21 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard),2801(shops)
+[root@ip-172-31-2-21 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles),2802(walks)
+```
+```
+[root@ip-172-31-2-22 ~]# groupadd shops
+dd walks
+usermod -G shops orchard
+[root@ip-172-31-2-22 ~]# groupadd walks
+usermod -G walks raffles
+[root@ip-172-31-2-22 ~]# usermod -G shops orchard
+id orchard
+id raffles[root@ip-172-31-2-22 ~]# usermod -G walks raffles
+[root@ip-172-31-2-22 ~]# id orchard
+uid=2800(orchard) gid=2800(orchard) groups=2800(orchard),2801(shops)
+[root@ip-172-31-2-22 ~]# id raffles
+uid=2700(raffles) gid=2700(raffles) groups=2700(raffles),2802(walks)
+```
+* /etc/passwd
+```
+[root@ip-172-31-15-248 ~]# cat /etc/passwd | grep raffles
+raffles:x:2700:2700::/home/raffles:/bin/bash
+[root@ip-172-31-15-248 ~]# cat /etc/passwd | grep orchard
+orchard:x:2800:2800::/home/orchard:/bin/bash
+```
+* /etc/groups
+```
+[root@ip-172-31-15-248 ~]# cat /etc/group | grep shops
+shops:x:2801:orchard
+[root@ip-172-31-15-248 ~]# cat /etc/group | grep walks
+walks:x:2802:raffles
 ```
